@@ -68,8 +68,8 @@ function asAmirror(frase) {
    fraseSep.forEach((palabra) => {
       let palabSep = palabra.split('');
       let palabAlr = [];
-      for(let i=palabSep.length -1; i => 0; i--){
-         palabAlr.push(i);
+      for(let i=palabSep.length -1; i >= 0; i--){
+         palabAlr.push(palabSep[i]);
       }
       let newPalabAlr = palabAlr.join('');
       arrFrase.push(newPalabAlr);
@@ -86,7 +86,9 @@ function capicua(numero) {
    let separ = numStr.split('');
    let numVeces = Math.floor(separ.length / 2);
    for(let i=0; i<numVeces; i++){
-      if(separ[i] != separ[separ.length - 1 - i]) return "No es capicua";
+      if(separ[i] != separ[separ.length - 1 - i]) {
+         return "No es capicua"
+      }
    }
    return "Es capicua";
 }
@@ -98,7 +100,9 @@ function deleteAbc(string) {
    let separ = string.split('');
    let finalArr = [];
    separ.forEach((letra) => {
-      if(letra != 'a' && letra != 'b' && letra != 'c') finalArr.push(letra);
+      if(letra != 'a' && letra != 'b' && letra != 'c') {
+         finalArr.push(letra)
+      }
    });
    return finalArr.join('');
 }
@@ -109,7 +113,23 @@ function sortArray(arrayOfStrings) {
    // de la longitud de cada string.
    // [EJEMPLO]: ["You", "are", "beautiful", "looking"]  ---> [“You", "are", "looking", "beautiful"]
    // Tu código:
-   
+   let wordLen = arrayOfStrings.map((word) => {
+      return word.length;
+   });
+   wordLen = wordLen.sort(function (a, b) {  return a - b;  });
+   let arrCopy = arrayOfStrings;
+    let finalArr = [];
+    let correctWord;
+    for(let i=0; i<wordLen.length; i++){
+       for(let j=0; j<arrCopy.length; j++){
+          if(arrCopy[j].length == wordLen[i]){
+            correctWord = arrCopy.splice(j,1);          
+             finalArr.push(correctWord[0]);
+             break;
+          }
+       }
+    }
+    return finalArr;
 }
 
 function buscoInterseccion(array1, array2) {
@@ -122,9 +142,12 @@ function buscoInterseccion(array1, array2) {
    let finalArr = [];
    array1.forEach((num1) => {
       array2.forEach((num2) => {
-         if(num1 == num2) finalArr.push(num1);
+         if(num1 == num2) {
+            finalArr.push(num1)
+         }
       });
    });
+   return finalArr;
 }
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
